@@ -18,6 +18,14 @@
 #   KC_HTTP_ENABLED=true                    (TLS terminates at Railway's proxy)
 #   KC_BOOTSTRAP_ADMIN_USERNAME / KC_BOOTSTRAP_ADMIN_PASSWORD  (first boot only)
 #
+# kc.health-enabled and kc.http-management-health-enabled are BUILD-TIME
+# options — Keycloak ignores them if only set as runtime env vars (logs
+# "the new values will NOT be used until another build is run"). They're
+# baked in below instead. http-management-health-enabled=false keeps
+# /health/ready etc. on the main HTTP port (8080) rather than moving them to
+# the separate management port (9000), since Railway's healthcheck only
+# probes the single port the service exposes.
+#
 # realm-export.json (kept in sync with
 # skateboard-infrastructure/.docker/keycloak/realm-export.json) is baked into
 # the image and imported automatically on every start via --import-realm.
@@ -36,7 +44,7 @@ FROM quay.io/keycloak/keycloak:26.7 AS builder
 
 ENV KC_DB=postgres
 
-RUN /opt/keycloak/bin/kc.sh build
+RUN /opt/keycloak/bin/kc.sh build --health-enabled=true --http-management-health-enabled=false
 
 FROM quay.io/keycloak/keycloak:26.7
 
