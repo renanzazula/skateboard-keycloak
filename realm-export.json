@@ -1,0 +1,528 @@
+{
+  "realm": "skateboard-podcast",
+  "displayName": "Skateboard Podcast",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "rememberMe": true,
+  "bruteForceProtected": true,
+  "passwordPolicy": "length(8)",
+  "loginTheme": "skateboard",
+  "accessTokenLifespan": 900,
+  "ssoSessionIdleTimeout": 2592000,
+  "ssoSessionMaxLifespan": 5184000,
+  "offlineSessionIdleTimeout": 2592000,
+  "smtpServer": {},
+  "roles": {
+    "realm": [
+      {
+        "name": "default-roles-skateboard-podcast",
+        "description": "Realm default role — STANDARD added so self-registered users get the STANDARD user type (and its FUNC_* permissions) automatically. Import skips re-creating this auto-created role but still merges the composites.",
+        "composite": true,
+        "composites": {
+          "realm": [
+            "STANDARD"
+          ]
+        }
+      },
+      {
+        "name": "FUNC_TAB_HOME",
+        "description": "Permission: Home tab"
+      },
+      {
+        "name": "FUNC_TAB_PODCAST",
+        "description": "Permission: Podcast tab"
+      },
+      {
+        "name": "FUNC_TAB_SETTINGS",
+        "description": "Permission: Settings tab"
+      },
+      {
+        "name": "FUNC_PODCAST_CREATE_POST",
+        "description": "Permission: create podcast posts"
+      },
+      {
+        "name": "FUNC_PODCAST_EDIT_POST",
+        "description": "Permission: edit podcast posts"
+      },
+      {
+        "name": "FUNC_PODCAST_DELETE_POST",
+        "description": "Permission: delete podcast posts"
+      },
+      {
+        "name": "FUNC_PODCAST_IMPORT_JSON",
+        "description": "Permission: import podcast posts"
+      },
+      {
+        "name": "FUNC_PODCAST_MANAGE_CATEGORIES",
+        "description": "Permission: manage podcast categories (rename, reorder, set default)"
+      },
+      {
+        "name": "FUNC_USER_SELF_READ",
+        "description": "Permission: read own skateboard-user-be profile/preferences (GET /me, GET /me/preferences)"
+      },
+      {
+        "name": "FUNC_USER_SELF_UPDATE",
+        "description": "Permission: update own skateboard-user-be profile/preferences/username/profile picture (PATCH /me, PATCH /me/preferences, POST /me/profile-picture, POST /me/username)"
+      },
+      {
+        "name": "FUNC_USER_ACCOUNT_DELETE",
+        "description": "Permission: delete own account (DELETE /me)"
+      },
+      {
+        "name": "FUNC_USER_PASSWORD_CHANGE",
+        "description": "Permission: change own password (POST /me/change-password)"
+      },
+      {
+        "name": "FUNC_USER_ACCOUNT_DEACTIVATE",
+        "description": "Permission: deactivate own account (POST /me/deactivate)"
+      },
+      {
+        "name": "FUNC_USER_PROBLEM_REPORT_CREATE",
+        "description": "Permission: submit a problem report (POST /me/problem-reports)"
+      },
+      {
+        "name": "FUNC_TAB_SETTINGS_BRANDING",
+        "description": "Permission: manage branding (login background, app logo, branding assets)"
+      },
+      {
+        "name": "FUNC_HOME_CATEGORY_CONFIG",
+        "description": "Permission: configure which video categories are eligible for the Home dashboard"
+      },
+      {
+        "name": "FUNC_HOME_FEATURED_PLAYER_CONFIG",
+        "description": "Permission: configure the Home dashboard Featured Player (default episode and, later, schedules)"
+      },
+      {
+        "name": "FUNC_ABOUT_US_MANAGE",
+        "description": "Permission: manage the About Us page (edit sections, upload images, publish). Standard users only read the published page (FUNC_TAB_SETTINGS)."
+      },
+      {
+        "name": "FUNC_NOTIFICATION_DEVICE_MANAGE",
+        "description": "Permission: register/remove own push devices in skateboard-notification-be (PUT/DELETE /api/me/devices/{deviceIdentifier}). Self-service — belongs to STANDARD as well as ADMIN. Preferences reuse FUNC_USER_SELF_READ/FUNC_USER_SELF_UPDATE instead."
+      },
+      {
+        "name": "FUNC_CAMPAIGN_READ",
+        "description": "Permission: read startup campaigns in skateboard-app-config-be admin endpoints (GET /api/campaigns, GET /api/campaigns/{id}). The runtime GET /api/campaigns/active is anonymous and does not require this. Granted to STANDARD and ADMIN per spec §3."
+      },
+      {
+        "name": "FUNC_CAMPAIGN_MANAGE",
+        "description": "Permission: create/edit/delete startup campaigns and their screens/media in skateboard-app-config-be (POST/PUT/PATCH/DELETE /api/campaigns/**, excluding publish/pause). ADMIN only."
+      },
+      {
+        "name": "FUNC_CAMPAIGN_PUBLISH",
+        "description": "Permission: change startup campaign lifecycle state in skateboard-app-config-be (publish/pause/archive). ADMIN only."
+      },
+      {
+        "name": "ADMIN",
+        "description": "User type: full access. Composite of every FUNC_* permission.",
+        "composite": true,
+        "composites": {
+          "realm": [
+            "FUNC_TAB_HOME",
+            "FUNC_TAB_PODCAST",
+            "FUNC_TAB_SETTINGS",
+            "FUNC_PODCAST_CREATE_POST",
+            "FUNC_PODCAST_EDIT_POST",
+            "FUNC_PODCAST_DELETE_POST",
+            "FUNC_PODCAST_IMPORT_JSON",
+            "FUNC_PODCAST_MANAGE_CATEGORIES",
+            "FUNC_USER_SELF_READ",
+            "FUNC_USER_SELF_UPDATE",
+            "FUNC_USER_ACCOUNT_DELETE",
+            "FUNC_USER_PASSWORD_CHANGE",
+            "FUNC_USER_ACCOUNT_DEACTIVATE",
+            "FUNC_USER_PROBLEM_REPORT_CREATE",
+            "FUNC_TAB_SETTINGS_BRANDING",
+            "FUNC_HOME_CATEGORY_CONFIG",
+            "FUNC_HOME_FEATURED_PLAYER_CONFIG",
+            "FUNC_ABOUT_US_MANAGE",
+            "FUNC_NOTIFICATION_DEVICE_MANAGE",
+            "FUNC_CAMPAIGN_READ",
+            "FUNC_CAMPAIGN_MANAGE",
+            "FUNC_CAMPAIGN_PUBLISH"
+          ]
+        }
+      },
+      {
+        "name": "STANDARD",
+        "description": "User type: regular member. Grants FUNC_TAB_HOME, FUNC_TAB_PODCAST (read-only), FUNC_TAB_SETTINGS, and all FUNC_USER_* self-service permissions. Other-user mutations need separate ADMIN grants. Add composites here as more STANDARD features ship.",
+        "composite": true,
+        "composites": {
+          "realm": [
+            "FUNC_TAB_HOME",
+            "FUNC_TAB_PODCAST",
+            "FUNC_TAB_SETTINGS",
+            "FUNC_USER_SELF_READ",
+            "FUNC_USER_SELF_UPDATE",
+            "FUNC_USER_ACCOUNT_DELETE",
+            "FUNC_USER_PASSWORD_CHANGE",
+            "FUNC_USER_ACCOUNT_DEACTIVATE",
+            "FUNC_USER_PROBLEM_REPORT_CREATE",
+            "FUNC_NOTIFICATION_DEVICE_MANAGE",
+            "FUNC_CAMPAIGN_READ"
+          ]
+        }
+      },
+      {
+        "name": "GUEST",
+        "description": "User type: anonymous guest sessions. Never assigned to real Keycloak users. No FUNC_* permissions today (its prior grants, FUNC_TAB_HOME/FUNC_TAB_SETTINGS, were removed as unused). Add composites here as guest-accessible features ship."
+      }
+    ]
+  },
+  "components": {
+    "org.keycloak.userprofile.UserProfileProvider": [
+      {
+        "providerId": "declarative-user-profile",
+        "subComponents": {},
+        "config": {
+          "kc.user.profile.config": [
+            "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\",\"user\"]},\"multivalued\":false},{\"name\":\"tenant_id\",\"displayName\":\"Tenant ID\",\"permissions\":{\"view\":[\"admin\"],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[],\"unmanagedAttributePolicy\":\"ENABLED\"}"
+          ]
+        }
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "skateboard-mobile",
+      "name": "Skateboard Mobile App",
+      "description": "Public OIDC client used by the Expo mobile app. directAccessGrantsEnabled backs the in-app username/password login (ROPC); standardFlowEnabled/PKCE remain available for future hosted-page use. No client secret is used.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "fullScopeAllowed": true,
+      "redirectUris": [
+        "skateboardfe://*"
+      ],
+      "webOrigins": [],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "skateboardfe://*"
+      },
+      "protocolMappers": [
+        {
+          "name": "tenant-id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "tenant_id",
+            "claim.name": "tenant_id",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-podcast-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "audience-user-be",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-user-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "audience-app-config-be",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-app-config-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "audience-notification-be",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-notification-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "authorities",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "usermodel.realmRoleMapping.rolePrefix": "",
+            "multivalued": "true",
+            "claim.name": "authorities",
+            "jsonType.label": "String",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "false"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "skateboard-podcast-fe",
+      "name": "Skateboard Podcast App",
+      "description": "Public OIDC client used by the Expo app. directAccessGrantsEnabled backs the app's in-app username/password login form (Resource Owner Password Credentials); standardFlowEnabled/PKCE remain available for any future hosted-page use.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "fullScopeAllowed": true,
+      "redirectUris": [
+        "skateboardfe://*",
+        "myapp://*",
+        "http://localhost:8081/*",
+        "http://localhost:19006/*",
+        "https://skateboard-fe-production.up.railway.app/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8081",
+        "http://localhost:19006",
+        "https://skateboard-fe-production.up.railway.app"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "skateboardfe://*##myapp://*##http://localhost:8081/*##http://localhost:19006/*##https://skateboard-fe-production.up.railway.app/*"
+      },
+      "protocolMappers": [
+        {
+          "name": "tenant-id",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "tenant_id",
+            "claim.name": "tenant_id",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-podcast-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "audience-user-be",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-user-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "audience-app-config-be",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-app-config-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "audience-notification-be",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-notification-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "authorities",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "usermodel.realmRoleMapping.rolePrefix": "",
+            "multivalued": "true",
+            "claim.name": "authorities",
+            "jsonType.label": "String",
+            "id.token.claim": "false",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "false"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "skateboard-podcast-be",
+      "name": "Skateboard Podcast Backend",
+      "description": "Confidential client identifying the Spring podcast backend as a token audience. The backend only validates incoming JWTs (resource server) and never calls the Admin REST API, so no service account is provisioned.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "dev-backend-secret",
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false
+    },
+    {
+      "clientId": "skateboard-user-be",
+      "name": "Skateboard User Backend",
+      "description": "Confidential service-account client skateboard-user-be uses for Admin REST API calls (username changes, disabling/deleting identities, password resets — see adapter/out/keycloak/KeycloakIdentityAdapter). Secret is env-injected in production.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "dev-user-be-secret",
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true
+    },
+    {
+      "clientId": "skateboard-app-config-be",
+      "name": "Skateboard App Config Backend",
+      "description": "Confidential service-account client skateboard-app-config-be uses for Admin REST API calls. Secret is env-injected in production.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "dev-app-config-be-secret",
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true
+    },
+    {
+      "clientId": "skateboard-notification-be",
+      "name": "Skateboard Notification Backend",
+      "description": "Confidential client identifying the Spring notification backend as a token audience. Resource server only, like skateboard-podcast-be: validates JWTs, never calls the Admin REST API. Recipient resolution reads device/preference tables, not Keycloak.",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "dev-notification-be-secret",
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false
+    }
+  ],
+  "identityProviders": [
+    {
+      "alias": "google",
+      "providerId": "google",
+      "enabled": false,
+      "trustEmail": true,
+      "storeToken": false,
+      "config": {
+        "clientId": "replace-with-google-client-id",
+        "clientSecret": "replace-with-google-client-secret",
+        "useJwksUrl": "true"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "user@example.com",
+      "email": "user@example.com",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "Standard User",
+      "attributes": {
+        "tenant_id": [
+          "00000000-0000-0000-0000-000000000001"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "STANDARD"
+      ]
+    },
+    {
+      "username": "admin@example.com",
+      "email": "admin@example.com",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "Admin User",
+      "attributes": {
+        "tenant_id": [
+          "00000000-0000-0000-0000-000000000001"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "username": "service-account-skateboard-user-be",
+      "enabled": true,
+      "serviceAccountClientId": "skateboard-user-be",
+      "clientRoles": {
+        "realm-management": [
+          "manage-users",
+          "view-users",
+          "view-realm"
+        ]
+      }
+    },
+    {
+      "username": "service-account-skateboard-app-config-be",
+      "enabled": true,
+      "serviceAccountClientId": "skateboard-app-config-be",
+      "clientRoles": {
+        "realm-management": [
+          "manage-users",
+          "view-users",
+          "view-realm"
+        ]
+      }
+    }
+  ]
+}

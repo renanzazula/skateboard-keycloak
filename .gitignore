@@ -1,0 +1,6 @@
+# IDE
+.idea/
+*.iml
+
+.sonar/
+themes/skateboard/login/.sonar/

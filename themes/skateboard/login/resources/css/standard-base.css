@@ -1,0 +1,262 @@
+/*
+ * Brand overrides on top of keycloak.v2 (PatternFly v5, dark mode pinned).
+ * Tokens mirror the app's dark theme (FE shared/constants/themes.ts):
+ *   background #0B0B0C · surface #151517 · surfaceHigh #1D1D20
+ *   border rgba(255,255,255,0.07) · accent #F2A900 · accentDark #D99400
+ *   onAccent #1A1A1C · text #F5F5F4 · textDim #9C9C9F
+ * and the login screen's layout: skyline background under a 45% black
+ * overlay, 12px-radius 52px-high controls, Fraunces display titles.
+ */
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/fraunces-700-latin.woff2") format("woff2");
+}
+
+/* ---- Page background: skyline image + 45% black overlay ---- */
+
+body#keycloak-bg {
+  background-color: #0B0B0C;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("../img/background-mobile.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  body#keycloak-bg {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+      url("../img/background-desktop.png");
+  }
+}
+
+.pf-v5-c-login {
+  background: transparent;
+}
+
+/* ---- Brand header: app logo instead of the realm name text ---- */
+
+#kc-header-wrapper {
+  background: url("../img/logo.png") center / contain no-repeat;
+  block-size: 104px;
+  inline-size: min(240px, 70vw);
+  margin-inline: auto;
+  overflow: hidden;
+  /* Hide the realm display-name text; the logo carries the brand. */
+  font-size: 0;
+  color: transparent;
+}
+
+/* ---- Card ---- */
+
+.pf-v5-c-login__main {
+  background: rgba(21, 21, 23, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  color: #F5F5F4;
+}
+
+.pf-v5-c-login__main-title,
+h1#kc-page-title {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* ---- Form fields ---- */
+
+.pf-v5-c-login__main .pf-v5-c-form__label-text {
+  color: #F5F5F4;
+  font-weight: 600;
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control {
+  background-color: #1D1D20;
+  border-radius: 12px;
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control::after {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control:focus-within::after {
+  border-color: #F2A900;
+  border-width: 2px;
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control > :is(input, select, textarea) {
+  color: #F5F5F4;
+  padding-block: 0.85rem;
+  padding-inline: 1rem;
+}
+
+.pf-v5-c-login__main .pf-v5-c-form-control > input::placeholder {
+  color: #6B6B6E;
+}
+
+/* Password visibility / restart-login control buttons inside input groups */
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-control {
+  color: #9C9C9F;
+  border-radius: 12px;
+}
+
+/* ---- Buttons ---- */
+
+.pf-v5-c-login__main .pf-v5-c-button {
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-primary {
+  background-color: #F2A900;
+  color: #1A1A1C;
+  font-weight: 700;
+  min-block-size: 52px;
+}
+
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-primary:hover,
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-primary:focus {
+  background-color: #D99400;
+  color: #1A1A1C;
+}
+
+/* Secondary actions (e.g. "Back to Login") styled like the app's guest button */
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-secondary {
+  background-color: #151517;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #F5F5F4;
+  font-weight: 600;
+  min-block-size: 52px;
+}
+
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-secondary::after {
+  border: 0;
+}
+
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-secondary:hover,
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-secondary:focus {
+  background-color: #1D1D20;
+  color: #FFFFFF;
+}
+
+/* Stacked full-width actions with app-like spacing */
+.pf-v5-c-login__main .pf-v5-c-form__actions {
+  gap: 12px;
+}
+
+/* ---- Links ---- */
+
+.pf-v5-c-login__main a,
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-link {
+  color: #F2A900;
+}
+
+.pf-v5-c-login__main a:hover,
+.pf-v5-c-login__main .pf-v5-c-button.pf-m-link:hover {
+  color: #D99400;
+}
+
+/* ---- Secondary text ---- */
+
+.pf-v5-c-login__main .pf-v5-c-helper-text__item-text,
+.pf-v5-c-login__main #kc-info-wrapper,
+.pf-v5-c-login__main-footer-band-item {
+  color: #9C9C9F;
+}
+
+.pf-v5-c-login__main #kc-info-wrapper {
+  margin-block-start: 16px;
+  text-align: center;
+}
+
+.pf-v5-c-login__main .pf-v5-c-check__label {
+  color: #F5F5F4;
+}
+
+/* ---- Error and message pages ----
+ *
+ * keycloak.v2 renders error.ftl and info.ftl through the same login card, but
+ * PatternFly's own surface and status colours show through: a light-grey card
+ * and a blue accent bar, neither of which is in this brand. Those pages are
+ * the first thing a user sees when a flow breaks (a bad redirect_uri, an
+ * expired action link), so leaving them unstyled undoes the branding
+ * everywhere it matters most.
+ */
+
+.pf-v5-c-login__main,
+.pf-v5-c-login__main-body,
+.pf-v5-c-login__main-header {
+  background-color: #151517;
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+/* PatternFly's status bar above the card: blue by default. */
+.pf-v5-c-login__main::before,
+.pf-v5-c-login__main-header::before {
+  background-color: #F2A900;
+}
+
+#kc-error-message .instruction,
+.pf-v5-c-login__main-body p {
+  color: #9C9C9F;
+}
+
+/* The heading on an error/info page ("We are sorry..."). */
+#kc-page-title {
+  font-family: "Fraunces", Georgia, serif;
+  color: #F5F5F4;
+}
+
+/* ---- Alerts (invalid credentials, expired code, ...) ---- */
+
+.pf-v5-c-alert {
+  background-color: #1D1D20;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  color: #F5F5F4;
+}
+
+.pf-v5-c-alert.pf-m-danger,
+.pf-v5-c-alert.pf-m-warning,
+.pf-v5-c-alert.pf-m-success,
+.pf-v5-c-alert.pf-m-info {
+  /* Keep the semantic colour on the icon and the left edge only, so an error
+     still reads as an error without importing PatternFly's light surfaces. */
+  background-color: #1D1D20;
+}
+
+.pf-v5-c-alert.pf-m-danger { border-left: 3px solid #E24B4A; }
+.pf-v5-c-alert.pf-m-warning { border-left: 3px solid #F2A900; }
+.pf-v5-c-alert.pf-m-success { border-left: 3px solid #32D74B; }
+.pf-v5-c-alert.pf-m-info { border-left: 3px solid #F2A900; }
+
+.pf-v5-c-alert__title {
+  color: #F5F5F4;
+}
+
+.pf-v5-c-alert.pf-m-danger .pf-v5-c-alert__icon { color: #E24B4A; }
+.pf-v5-c-alert.pf-m-warning .pf-v5-c-alert__icon,
+.pf-v5-c-alert.pf-m-info .pf-v5-c-alert__icon { color: #F2A900; }
+.pf-v5-c-alert.pf-m-success .pf-v5-c-alert__icon { color: #32D74B; }
+
+/* ---- Identity-provider buttons (Google) ---- */
+
+#kc-social-providers a,
+#kc-social-providers .pf-v5-c-button {
+  background-color: #1D1D20;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  color: #F5F5F4;
+}
+
+#kc-social-providers a:hover,
+#kc-social-providers .pf-v5-c-button:hover {
+  background-color: #26262A;
+}
