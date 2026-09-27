@@ -106,6 +106,10 @@
         "description": "Permission: register/remove own push devices in skateboard-notification-be (PUT/DELETE /api/me/devices/{deviceIdentifier}). Self-service — belongs to STANDARD as well as ADMIN. Preferences reuse FUNC_USER_SELF_READ/FUNC_USER_SELF_UPDATE instead."
       },
       {
+        "name": "FUNC_NOTIFICATION_DEVICE_MANAGE_TEST",
+        "description": "Permission: send a test push to your own registered devices in skateboard-notification-be (POST /api/me/notifications/test). Diagnostic tool, ADMIN only."
+      },
+      {
         "name": "FUNC_CAMPAIGN_READ",
         "description": "Permission: read startup campaigns in skateboard-app-config-be admin endpoints (GET /api/campaigns, GET /api/campaigns/{id}). The runtime GET /api/campaigns/active is anonymous and does not require this. Granted to STANDARD and ADMIN per spec §3."
       },
@@ -142,6 +146,7 @@
             "FUNC_HOME_FEATURED_PLAYER_CONFIG",
             "FUNC_ABOUT_US_MANAGE",
             "FUNC_NOTIFICATION_DEVICE_MANAGE",
+            "FUNC_NOTIFICATION_DEVICE_MANAGE_TEST",
             "FUNC_CAMPAIGN_READ",
             "FUNC_CAMPAIGN_MANAGE",
             "FUNC_CAMPAIGN_PUBLISH"
