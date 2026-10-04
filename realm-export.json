@@ -113,6 +113,14 @@
         "description": "Permission: manage the Privacy Policy page (edit title/body, publish). GET /api/privacy-policy is fully public and requires no authority."
       },
       {
+        "name": "FUNC_TERMS_MANAGE",
+        "description": "Permission: manage the Terms & Conditions page (edit title/body, publish). Standard users only read the published page (FUNC_TAB_SETTINGS)."
+      },
+      {
+        "name": "FUNC_LICENSES_MANAGE",
+        "description": "Permission: manage the Open-source Licenses page (edit title/body, publish). Standard users only read the published page (FUNC_TAB_SETTINGS)."
+      },
+      {
         "name": "FUNC_NOTIFICATION_DEVICE_MANAGE",
         "description": "Permission: register/remove own push devices in skateboard-notification-be (PUT/DELETE /api/me/devices/{deviceIdentifier}). Self-service — belongs to STANDARD as well as ADMIN. Preferences reuse FUNC_USER_SELF_READ/FUNC_USER_SELF_UPDATE instead."
       },
@@ -157,6 +165,8 @@
             "FUNC_HOME_FEATURED_PLAYER_CONFIG",
             "FUNC_ABOUT_US_MANAGE",
             "FUNC_PRIVACY_POLICY_MANAGE",
+            "FUNC_TERMS_MANAGE",
+            "FUNC_LICENSES_MANAGE",
             "FUNC_NOTIFICATION_DEVICE_MANAGE",
             "FUNC_NOTIFICATION_DEVICE_MANAGE_TEST",
             "FUNC_CAMPAIGN_READ",
