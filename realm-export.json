@@ -141,6 +141,26 @@
         "description": "Permission: change startup campaign lifecycle state in skateboard-app-config-be (publish/pause/archive). ADMIN only."
       },
       {
+        "name": "FUNC_USER_ADMIN_LOOKUP",
+        "description": "Permission: resolve other users' verified email/active status by Keycloak user ID in skateboard-user-be (GET /admin/users/lookup). Used to validate and email selected Guest Application notification recipients. ADMIN only — reveals other users' contact details."
+      },
+      {
+        "name": "FUNC_GUEST_APPLICATION_CREATE",
+        "description": "Permission: submit a podcast guest application (POST /guest-applications in skateboard-podcast-be). Granted to STANDARD and ADMIN."
+      },
+      {
+        "name": "FUNC_GUEST_APPLICATION_READ_OWN",
+        "description": "Permission: read the caller's own podcast guest application (GET /guest-applications/me in skateboard-podcast-be). Granted to STANDARD and ADMIN."
+      },
+      {
+        "name": "FUNC_GUEST_APPLICATION_MANAGE",
+        "description": "Permission: list, review, and update the status of podcast guest applications in skateboard-podcast-be (GET/PATCH /admin/guest-applications/**). ADMIN only."
+      },
+      {
+        "name": "FUNC_GUEST_APPLICATION_CONFIGURE",
+        "description": "Permission: configure the Guest Application feature toggle, notification recipients, and confirmation email template in skateboard-app-config-be (GET/PUT /admin/guest-application-settings). ADMIN only."
+      },
+      {
         "name": "ADMIN",
         "description": "User type: full access. Composite of every FUNC_* permission.",
         "composite": true,
