@@ -477,7 +477,7 @@
     {
       "clientId": "skateboard-notification-be",
       "name": "Skateboard Notification Backend",
-      "description": "Confidential client identifying the Spring notification backend as a token audience. Resource server only, like skateboard-podcast-be: validates JWTs, never calls the Admin REST API. Recipient resolution reads device/preference tables, not Keycloak.",
+      "description": "Confidential client identifying the Spring notification backend as a token audience, and (since the Guest Application feature) also a service-account client in its own right: it calls skateboard-app-config-be for Guest Application settings and skateboard-user-be to resolve recipient emails, as itself, with no user in the loop once an event is on the queue. Previously resource-server-only; recipient resolution for push still reads device/preference tables, not Keycloak.",
       "enabled": true,
       "protocol": "openid-connect",
       "publicClient": false,
@@ -485,7 +485,31 @@
       "standardFlowEnabled": false,
       "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": false,
-      "serviceAccountsEnabled": false
+      "serviceAccountsEnabled": true,
+      "protocolMappers": [
+        {
+          "name": "audience-app-config-be",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-app-config-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        },
+        {
+          "name": "audience-user-be",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "skateboard-user-be",
+            "access.token.claim": "true",
+            "id.token.claim": "false"
+          }
+        }
+      ]
     }
   ],
   "identityProviders": [
@@ -570,6 +594,15 @@
           "view-realm"
         ]
       }
+    },
+    {
+      "username": "service-account-skateboard-notification-be",
+      "enabled": true,
+      "serviceAccountClientId": "skateboard-notification-be",
+      "realmRoles": [
+        "FUNC_GUEST_APPLICATION_CONFIGURE",
+        "FUNC_USER_ADMIN_LOOKUP"
+      ]
     }
   ]
 }
