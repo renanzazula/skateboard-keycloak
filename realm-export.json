@@ -196,7 +196,12 @@
             "FUNC_CAMPAIGN_READ",
             "FUNC_CAMPAIGN_MANAGE",
             "FUNC_CAMPAIGN_PUBLISH",
-            "FUNC_EMAIL_TEMPLATE_MANAGE"
+            "FUNC_EMAIL_TEMPLATE_MANAGE",
+            "FUNC_USER_ADMIN_LOOKUP",
+            "FUNC_GUEST_APPLICATION_CREATE",
+            "FUNC_GUEST_APPLICATION_READ_OWN",
+            "FUNC_GUEST_APPLICATION_MANAGE",
+            "FUNC_GUEST_APPLICATION_CONFIGURE"
           ]
         }
       },
