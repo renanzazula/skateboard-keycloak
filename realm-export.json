@@ -142,7 +142,7 @@
       },
       {
         "name": "FUNC_USER_ADMIN_LOOKUP",
-        "description": "Permission: resolve other users' verified email/active status by Keycloak user ID in skateboard-user-be (GET /admin/users/lookup). Used to validate and email selected Guest Application notification recipients. ADMIN only — reveals other users' contact details."
+        "description": "Permission: resolve other users' verified email/active status by Keycloak user ID in skateboard-user-be (GET /admin/users/lookup). Used to email Guest Application recipients. ADMIN only — reveals other users' contact details."
       },
       {
         "name": "FUNC_GUEST_APPLICATION_CREATE",
@@ -162,7 +162,7 @@
       },
       {
         "name": "FUNC_EMAIL_TEMPLATE_MANAGE",
-        "description": "Permission: list, read, and edit admin-configurable email templates (subject/body per type/language) in skateboard-app-config-be (GET/PUT /api/email-templates/**). Also granted to skateboard-notification-be's service account, which reads templates server-to-server to render outgoing emails. ADMIN only."
+        "description": "Permission: list, read, and edit admin-configurable email templates in skateboard-app-config-be (GET/PUT /api/email-templates/**). Also granted to skateboard-notification-be's service account, which reads templates to render outgoing emails. ADMIN only."
       },
       {
         "name": "ADMIN",
@@ -487,7 +487,7 @@
     {
       "clientId": "skateboard-notification-be",
       "name": "Skateboard Notification Backend",
-      "description": "Confidential client identifying the Spring notification backend as a token audience, and (since the Guest Application feature) also a service-account client in its own right: it calls skateboard-app-config-be for Guest Application settings and admin-configured email templates, and skateboard-user-be to resolve recipient emails, as itself, with no user in the loop once an event is on the queue. Previously resource-server-only; recipient resolution for push still reads device/preference tables, not Keycloak.",
+      "description": "Confidential client identifying the Spring notification backend as a token audience, and a service-account client calling app-config-be (Guest Application settings, email templates) and user-be (recipient emails) as itself.",
       "enabled": true,
       "protocol": "openid-connect",
       "publicClient": false,
