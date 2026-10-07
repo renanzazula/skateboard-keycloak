@@ -161,6 +161,10 @@
         "description": "Permission: configure the Guest Application feature toggle, notification recipients, and confirmation email template in skateboard-app-config-be (GET/PUT /admin/guest-application-settings). ADMIN only."
       },
       {
+        "name": "FUNC_EMAIL_TEMPLATE_MANAGE",
+        "description": "Permission: list, read, and edit admin-configurable email templates (subject/body per type/language) in skateboard-app-config-be (GET/PUT /api/email-templates/**). Also granted to skateboard-notification-be's service account, which reads templates server-to-server to render outgoing emails. ADMIN only."
+      },
+      {
         "name": "ADMIN",
         "description": "User type: full access. Composite of every FUNC_* permission.",
         "composite": true,
@@ -191,7 +195,8 @@
             "FUNC_NOTIFICATION_DEVICE_MANAGE_TEST",
             "FUNC_CAMPAIGN_READ",
             "FUNC_CAMPAIGN_MANAGE",
-            "FUNC_CAMPAIGN_PUBLISH"
+            "FUNC_CAMPAIGN_PUBLISH",
+            "FUNC_EMAIL_TEMPLATE_MANAGE"
           ]
         }
       },
@@ -477,7 +482,7 @@
     {
       "clientId": "skateboard-notification-be",
       "name": "Skateboard Notification Backend",
-      "description": "Confidential client identifying the Spring notification backend as a token audience, and (since the Guest Application feature) also a service-account client in its own right: it calls skateboard-app-config-be for Guest Application settings and skateboard-user-be to resolve recipient emails, as itself, with no user in the loop once an event is on the queue. Previously resource-server-only; recipient resolution for push still reads device/preference tables, not Keycloak.",
+      "description": "Confidential client identifying the Spring notification backend as a token audience, and (since the Guest Application feature) also a service-account client in its own right: it calls skateboard-app-config-be for Guest Application settings and admin-configured email templates, and skateboard-user-be to resolve recipient emails, as itself, with no user in the loop once an event is on the queue. Previously resource-server-only; recipient resolution for push still reads device/preference tables, not Keycloak.",
       "enabled": true,
       "protocol": "openid-connect",
       "publicClient": false,
@@ -616,7 +621,8 @@
       "serviceAccountClientId": "skateboard-notification-be",
       "realmRoles": [
         "FUNC_GUEST_APPLICATION_CONFIGURE",
-        "FUNC_USER_ADMIN_LOOKUP"
+        "FUNC_USER_ADMIN_LOOKUP",
+        "FUNC_EMAIL_TEMPLATE_MANAGE"
       ]
     }
   ]
